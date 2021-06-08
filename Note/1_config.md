@@ -11,7 +11,7 @@
   * 어떤 라이브러리를 가져올지 정한다.
   * 이 프로젝트(hello-spring)에서 사용하는 것
     * Spring Web : 웹 프로젝트에서 사용
-    * Thymelear : HTML을 만들어주는 템플릿 엔진 
+    * Thymeleaf : HTML을 만들어주는 템플릿 엔진 
 
 * IDE에서 build.gradle을 선택한 후 Open한다.
 * 프로젝트 구조
