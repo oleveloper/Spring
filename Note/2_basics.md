@@ -13,5 +13,6 @@
 
 
 ## MVC와 템플릿 엔진
+과거에는 Controller, View가 따로 분리되어있지 않았으나 View에 모든 코드를 작성했다 (Model one 방식). View는 화면을 그리는 데에 모든 역량을 집중한다. Controller나 Model은 비즈니스 로직과 관련이 있거나, 내부적인 것을 처리한다. 
 
 ## API
