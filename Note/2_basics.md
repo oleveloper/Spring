@@ -16,3 +16,5 @@
 과거에는 Controller, View가 따로 분리되어있지 않았으나 View에 모든 코드를 작성했다 (Model one 방식). View는 화면을 그리는 데에 모든 역량을 집중한다. Controller나 Model은 비즈니스 로직과 관련이 있거나, 내부적인 것을 처리한다. 
 
 ## API
+@ResponseBody : return으로서 http에서의 body부에 직접 내용을 넣겠다는 뜻. 
+템플릿 엔진과의 차이는, API방식은 view 같은게 없고 return이 그대로 전달된다는 점이다. 템플릿 엔진은 View라는 템플릿 엔진을 조작하는 방식이다. 
