@@ -82,13 +82,24 @@ class OwnerController {
 	@GetMapping("/owners")
 	public String processFindForm(Owner owner, BindingResult result, Map<String, Object> model) {
 
-		// allow parameterless GET request for /owners to return all records
-		if (owner.getLastName() == null) {
-			owner.setLastName(""); // empty string signifies broadest possible search
+//		// allow parameterless GET request for /owners to return all records
+//		if (owner.getLastName() == null) {
+//			owner.setLastName(""); // empty string signifies broadest possible search
+//		}
+		Collection<Owner> results = null;
+
+		if (owner.getLastName() == null && owner.getFirstName() == null) {
+			owner.setFirstName("");
+			owner.setLastName("");
+		} else if (owner.getLastName() != null && owner.getFirstName() != null) {
+			results = this.owners.findByFullName(owner.getFirstName(), owner.getLastName());
+		} else if (owner.getLastName() != null) {
+			// find owners by last name
+			results = this.owners.findByLastName(owner.getLastName());
+		} else if (owner.getFirstName() != null) {
+			results = this.owners.findByFirstName(owner.getFirstName());
 		}
 
-		// find owners by last name
-		Collection<Owner> results = this.owners.findByLastName(owner.getLastName());
 		if (results.isEmpty()) {
 			// no owners found
 			result.rejectValue("lastName", "notFound", "not found");
