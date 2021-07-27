@@ -1,4 +1,4 @@
-package com.humnyaring.core.member;
+package member;
 
 import java.util.HashMap;
 import java.util.Map;
