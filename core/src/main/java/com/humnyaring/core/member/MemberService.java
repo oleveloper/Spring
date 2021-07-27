@@ -1,4 +1,4 @@
-package member;
+package com.humnyaring.core.member;
 
 public interface MemberService {
     void join(Member member);

@@ -1,4 +1,4 @@
-package member;
+package com.humnyaring.core.member;
 
 public class MemberServiceImpl implements MemberService{
 

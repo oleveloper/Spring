@@ -1,4 +1,4 @@
-package member;
+package com.humnyaring.core.member;
 
 public class Member {
     private Long id;
