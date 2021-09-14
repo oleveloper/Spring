@@ -65,7 +65,20 @@ public class JpaMain {
 
             /* update : Dirty Checking, 변경 감지 */
             Member member = em.find(Member.class, 150L);
-            member.setName("ABCDE");
+            member.setName("AAAAA");
+
+            /* 준영속 상태로 만드는 방법 */
+            /* detach
+             * 영속성 컨텍스트에서 관리하지 않으므로 update 되지 않는다. */
+//            em.detach(member);
+
+            /* entity manager 안에 있는 영속성 컨텍스트를 모두 지운다.(초기화)
+             * 1차 컨텍스트를 모두 삭제해버린다. */
+//            em.clear();
+//            Member member2 = em.find(Member.class, 150L); //다시 영속성 컨텍스트에 올린다
+
+            /* 영속성 컨텍스트를 종료한다. */
+//            em.close();
 
             System.out.println("==========================");
             tx.commit();
