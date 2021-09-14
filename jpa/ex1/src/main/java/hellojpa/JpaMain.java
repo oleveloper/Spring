@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.Arrays;
 import java.util.List;
 
 public class JpaMain {
@@ -20,19 +19,27 @@ public class JpaMain {
         tx.begin();
 
         try {
-            /* create */
+            /* create
+             * 비영속 상태 */
 //            Member member = new Member();
 //            member.setId(1L);
 //            member.setName("helloA");
-//            em.persist(member);
 
+            /* 객체를 저장한 상태(영속).
+             * entity manager 내부 영속성 컨텍스트에서 member 객체의 관리가 시작 */
+//            em.persist(member);
 
 //            Member findMember = em.find(Member.class, 1L);
             /* retrieve */
 //            System.out.println("findMember.id = " + findMember.getId());
 //            System.out.println("findMember.name = " + findMember.getName());
 
-            /* delete */
+            /* 준영속
+             * detach : member entity를 영속성 컨텍스트에서 분리. 준영속 상태 */
+//            em.detach(member);
+
+            /* delete
+             * remove : 객체를 삭제한 상태 */
 //            em.remove(findMember);
 
             /* update */
