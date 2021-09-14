@@ -48,14 +48,21 @@ public class JpaMain {
             /* JPQL : 테이블이 아닌 엔티티 객체를 대상으로 질의한다. 객체 지향 SQL이라고 할 수 있다.
                       SQL를 추상화하여 특정 DB SQL에 의존하지 않으므로
                       dialect를 바꾸어도 쿼리를 바꾸지 않아도 된다. */
-             List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                     .setFirstResult(1)
-                     .setMaxResults(8)
-                    .getResultList();
-             for (Member member : result) {
-                 System.out.println("member = " + member.getName());
-             }
+//             List<Member> result = em.createQuery("select m from Member as m", Member.class)
+//                     .setFirstResult(1)
+//                     .setMaxResults(8)
+//                    .getResultList();
+//             for (Member member : result) {
+//                 System.out.println("member = " + member.getName());
+//             }
 
+            Member member1 = new Member(150L, "A");
+            Member member2 = new Member(160L, "B");
+
+            em.persist(member1);
+            em.persist(member2);
+
+            System.out.println("==========================");
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
