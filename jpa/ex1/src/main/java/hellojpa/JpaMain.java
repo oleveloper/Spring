@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.Arrays;
 import java.util.List;
 
 public class JpaMain {
@@ -65,7 +66,15 @@ public class JpaMain {
 
             /* update : Dirty Checking, 변경 감지 */
             Member member = em.find(Member.class, 150L);
-//            member.setName("AAAAA");
+            member.setUsername("A");
+
+            System.out.println("==================");
+            /* 영속성 컨텍스트에 삽입하기 위해서는 PK가 있어야 하므로,
+               strategy가 IDENTITY인 insert의 경우 이 시점에 insert된다
+               SEQUENCE인 경우 JPA 매커니즘에 의해 'call next value for ~'가 호출된다. 따라서 insert 쿼리가 호출되지 않고 commit시에 호출된다. */
+            em.persist(member);
+            System.out.println("member.id = " + member.getId());
+            System.out.println("==================");
 
             /* 준영속 상태로 만드는 방법 */
             /* detach
@@ -80,7 +89,6 @@ public class JpaMain {
             /* 영속성 컨텍스트를 종료한다. */
 //            em.close();
 
-            System.out.println("==========================");
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
