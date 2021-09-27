@@ -65,15 +65,29 @@ public class JpaMain {
 //            em.persist(member2);
 
             /* update : Dirty Checking, 변경 감지 */
-            Member member = em.find(Member.class, 150L);
-            member.setUsername("A");
+//            Member member = em.find(Member.class, 150L);
+//            member.setUsername("A");
+
+            Member member1 = new Member();
+            member1.setUsername("A");
+
+            Member member2 = new Member();
+            member2.setUsername("B");
+
+            Member member3 = new Member();
+            member3.setUsername("C");
 
             System.out.println("==================");
             /* 영속성 컨텍스트에 삽입하기 위해서는 PK가 있어야 하므로,
                strategy가 IDENTITY인 insert의 경우 이 시점에 insert된다
                SEQUENCE인 경우 JPA 매커니즘에 의해 'call next value for ~'가 호출된다. 따라서 insert 쿼리가 호출되지 않고 commit시에 호출된다. */
-            em.persist(member);
-            System.out.println("member.id = " + member.getId());
+            em.persist(member1); //1, 51
+            em.persist(member2); //MEM
+            em.persist(member3); //MEM
+
+            System.out.println("member1 = " + member1.getId());
+            System.out.println("member2 = " + member2.getId());
+            System.out.println("member3 = " + member3.getId());
             System.out.println("==================");
 
             /* 준영속 상태로 만드는 방법 */

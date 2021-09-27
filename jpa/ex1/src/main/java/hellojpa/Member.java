@@ -10,7 +10,7 @@ import java.util.Date;
 @SequenceGenerator(
         name = "MEMBER_SEQ_GENERATOR",
         sequenceName = "MEMBER_SEQ",
-        initialValue = 1, allocationSize = 1
+        initialValue = 1, allocationSize = 50
 )
 /* TABLE 전략
 * GeneratedValue의 strategy를 GenerationType.TABLE 로 한다.
@@ -58,7 +58,8 @@ public class Member {
     @Id /* PK로 mapping */
     /* 이름을 주지 않으면 hibernate_sequence 라는 하이버네이트 기본 시퀀스를 사용하게 된다
     * generator를 사용하면 원하는 옵션을 주어 시퀀스를 사용할 수 있게 된다 */
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "MEMBER_SEQ_GENERATOR")
+//    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "MEMBER_SEQ_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_SEQ_GENERATOR")
     private Long id;
 
     /* 필드와 매핑할 테이블의 컬럼 이름. 객체는 username, DB column 이름은 name */
