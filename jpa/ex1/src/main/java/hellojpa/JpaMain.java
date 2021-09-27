@@ -105,20 +105,33 @@ public class JpaMain {
             /* 영속성 컨텍스트를 종료한다. */
 //            em.close();
 
+            //저장
             Team team = new Team();
             team.setName("TeamA");
             em.persist(team);
 
             Member member = new Member();
             member.setUsername("member1");
-            member.setTeamId(team.getId());
+//            member.setTeamId(team.getId());
+            member.setTeam(team);
+
             em.persist(member);
+
+            /* 영속성 컨텍스트를 초기화 */
+            em.flush();
+            em.clear();
 
             /* 객체지향스럽지 않은 코드. 객체를 테이블에 맞추어 데이터 중심으로 모델링하면 협력 관계를 만들 수 없다. */
             Member findMember = em.find(Member.class, member.getId());
 
-            Long findTeamId = findMember.getTeamId();
-            Team findTeam = em.find(Team.class, findTeamId);
+//            Long findTeamId = findMember.getTeamId();
+//            Team findTeam = em.find(Team.class, findTeamId);
+            Team findTeam = findMember.getTeam();
+            System.out.println("findTeam = " + findTeam.getName());
+
+            /* DB 외래키 값을 수정하는 예시 */
+//            Team newTeam = em.find(Team.class, 100L);
+//            findMember.setTeam(newTeam);
 
             tx.commit();
         } catch (Exception e) {

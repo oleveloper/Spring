@@ -32,14 +32,35 @@ public class Member {
 //    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "MEMBER_SEQ_GENERATOR")
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_SEQ_GENERATOR")
     @GeneratedValue
+    @Column(name = "MEMBER_ID")
     private Long id;
 
     /* 필드와 매핑할 테이블의 컬럼 이름. 객체는 username, DB column 이름은 name */
     @Column(name = "USERNAME")
     private String username;
 
-    @Column(name = "TEAM_ID")
-    private Long teamId;
+//    @Column(name = "TEAM_ID")
+//    private Long teamId;
+//    public Long getTeamId() {
+//        return teamId;
+//    }
+//
+//    public void setTeamId(Long teamId) {
+//        this.teamId = teamId;
+//    }
+
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+    
 
     public Long getId() {
         return id;
@@ -57,13 +78,7 @@ public class Member {
         this.username = username;
     }
 
-    public Long getTeamId() {
-        return teamId;
-    }
 
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
-    }
     /* Integer와 가장 적절한 숫자 타입이 DB에 만들어진다 */
 //    private Integer age;
 
