@@ -68,27 +68,29 @@ public class JpaMain {
 //            Member member = em.find(Member.class, 150L);
 //            member.setUsername("A");
 
-            Member member1 = new Member();
-            member1.setUsername("A");
 
-            Member member2 = new Member();
-            member2.setUsername("B");
+//            Member member1 = new Member();
+//            member1.setUsername("A");
+//
+//            Member member2 = new Member();
+//            member2.setUsername("B");
+//
+//            Member member3 = new Member();
+//            member3.setUsername("C");
+//
+//            System.out.println("==================");
+//            /* 영속성 컨텍스트에 삽입하기 위해서는 PK가 있어야 하므로,
+//               strategy가 IDENTITY인 insert의 경우 이 시점에 insert된다
+//               SEQUENCE인 경우 JPA 매커니즘에 의해 'call next value for ~'가 호출된다. 따라서 insert 쿼리가 호출되지 않고 commit시에 호출된다. */
+//            em.persist(member1); //1, 51
+//            em.persist(member2); //MEM
+//            em.persist(member3); //MEM
+//
+//            System.out.println("member1 = " + member1.getId());
+//            System.out.println("member2 = " + member2.getId());
+//            System.out.println("member3 = " + member3.getId());
+//            System.out.println("==================");
 
-            Member member3 = new Member();
-            member3.setUsername("C");
-
-            System.out.println("==================");
-            /* 영속성 컨텍스트에 삽입하기 위해서는 PK가 있어야 하므로,
-               strategy가 IDENTITY인 insert의 경우 이 시점에 insert된다
-               SEQUENCE인 경우 JPA 매커니즘에 의해 'call next value for ~'가 호출된다. 따라서 insert 쿼리가 호출되지 않고 commit시에 호출된다. */
-            em.persist(member1); //1, 51
-            em.persist(member2); //MEM
-            em.persist(member3); //MEM
-
-            System.out.println("member1 = " + member1.getId());
-            System.out.println("member2 = " + member2.getId());
-            System.out.println("member3 = " + member3.getId());
-            System.out.println("==================");
 
             /* 준영속 상태로 만드는 방법 */
             /* detach
@@ -102,6 +104,21 @@ public class JpaMain {
 
             /* 영속성 컨텍스트를 종료한다. */
 //            em.close();
+
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeamId(team.getId());
+            em.persist(member);
+
+            /* 객체지향스럽지 않은 코드. 객체를 테이블에 맞추어 데이터 중심으로 모델링하면 협력 관계를 만들 수 없다. */
+            Member findMember = em.find(Member.class, member.getId());
+
+            Long findTeamId = findMember.getTeamId();
+            Team findTeam = em.find(Team.class, findTeamId);
 
             tx.commit();
         } catch (Exception e) {
