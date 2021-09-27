@@ -65,7 +65,7 @@ public class JpaMain {
 
             /* update : Dirty Checking, 변경 감지 */
             Member member = em.find(Member.class, 150L);
-            member.setName("AAAAA");
+//            member.setName("AAAAA");
 
             /* 준영속 상태로 만드는 방법 */
             /* detach
